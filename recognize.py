@@ -3,10 +3,10 @@
 #------------------------------------------------------------
 
 # organize imports
-import cv2
-import imutils
-import numpy as np
-from sklearn.metrics import pairwise
+import numpy as np #numpy array to do numpy operations
+import cv2 #OpenCV (image processing)
+import imutils #Image resize
+from sklearn.metrics import pairwise #image recognition
 
 # global variables
 bg = None
@@ -100,7 +100,7 @@ def count(thresholded, segmented):
         # 1. The contour region is not the wrist (bottom area)
         # 2. The number of points along the contour does not exceed
         #     25% of the circumference of the circular ROI
-        if ((cY + (cY * 0.25)) > (y + h)) and ((circumference * 0.25) > c.shape[0]):
+        if ((cY + (cY * 0.35)) > (y + h)) and ((circumference * 0.35) > c.shape[0]):
             count += 1
 
     return count
@@ -171,9 +171,24 @@ if __name__ == "__main__":
 
                 # count the number of fingers
                 fingers = count(thresholded, segmented)
-
-                cv2.putText(clone, str(fingers), (70, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
-                
+                item = "Select an item"
+                if fingers == 1:
+                    item = "Coffee"
+                elif fingers == 2:
+                    item = "Lays"
+                elif fingers == 3:
+                    item = "Tea"
+                elif fingers == 4:
+                    item = "Chocolate"
+                elif fingers == 5:
+                    item = "Dew"
+                else:
+                    item = "Select an item"
+                cv2.putText(clone, item, (70, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+                keypress = cv2.waitKey(1) & 0xFF
+                if keypress == ord('y'):
+                    print(f"Selected {item}.......Dispensing")
+                    exit(0)
                 # show the thresholded image
                 cv2.imshow("Thesholded", thresholded)
 
