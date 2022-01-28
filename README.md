@@ -1,6 +1,4 @@
 # GestureAutomatedVendingMachine
-## Working DEmonstration
-
-
-https://user-images.githubusercontent.com/69914741/151624544-3a4cc370-e6ad-4166-a72c-3b872d6a95bd.mp4
+## Working Demonstration
+https://user-images.githubusercontent.com/69914741/151624809-322482fa-af2b-4a9a-9e38-92982037558f.mp4
 
